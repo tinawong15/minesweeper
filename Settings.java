@@ -53,19 +53,35 @@ public class Settings extends Application {
         pane.add(directions, 0,5,4,1);
         GridPane.setHalignment(directions, HPos.LEFT);
 
+        Stage secondStage = new Stage();
         beginner.setOnAction(e -> {
             Game game = new Game(9, 9, 10);
-            primaryStage.getScene().setRoot(game.getRootPane());
+            Scene secondScene = new Scene(game.getRootPane(), game.getWidth() * 50, game.getHeight() * 50);
+            secondStage.setScene(secondScene);
+            secondStage.setX(primaryStage.getX() + 250);
+            secondStage.setY(primaryStage.getY() + 100);
+            secondStage.setTitle("Minesweeper");
+            secondStage.show();
         });
 
         intermediate.setOnAction(e -> {
             Game game = new Game(16, 16, 40);
-            primaryStage.getScene().setRoot(game.getRootPane());
+            Scene secondScene = new Scene(game.getRootPane(), 200, 100);
+            secondStage.setScene(secondScene);
+            secondStage.setX(primaryStage.getX() + 250);
+            secondStage.setY(primaryStage.getY() + 100);
+            secondStage.setTitle("Minesweeper");
+            secondStage.show();
         });
 
         expert.setOnAction(e -> {
             Game game = new Game(16, 30, 99);
-            primaryStage.getScene().setRoot(game.getRootPane());
+            Scene secondScene = new Scene(game.getRootPane(), 200, 100);
+            secondStage.setScene(secondScene);
+            secondStage.setX(primaryStage.getX() + 250);
+            secondStage.setY(primaryStage.getY() + 100);
+            secondStage.setTitle("Minesweeper");
+            secondStage.show();
         });
 
         custom.setOnAction(e -> {
@@ -73,7 +89,12 @@ public class Settings extends Application {
             int width = Integer.parseInt(tfWidth.getText());
             int bombs = Integer.parseInt(tfBombs.getText());
             Game game = new Game(height, width, bombs);
-            primaryStage.getScene().setRoot(game.getRootPane());
+            Scene secondScene = new Scene(game.getRootPane(), 200, 100);
+            secondStage.setScene(secondScene);
+            secondStage.setX(primaryStage.getX() + 250);
+            secondStage.setY(primaryStage.getY() + 100);
+            secondStage.setTitle("Minesweeper");
+            secondStage.show();
         });
 
         // Create a scene and place it in the stage

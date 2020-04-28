@@ -19,9 +19,9 @@ public class Game {
         this.bombs = bombs;
 
         rootPane = new Pane();
-        for(int i = 0; i < height; i++) {
-            for(int j = 0; j < width; j++) {
-                Rectangle r = new Rectangle(j, i, 1, 1);
+        for(int i = 0; i < height * 50; i+=50) {
+            for(int j = 0; j < width * 50; j+=50) {
+                Rectangle r = new Rectangle(i, j, 50, 50);
                 r.setStroke(Color.BLACK);
                 r.setFill(Color.WHITE);
                 rootPane.getChildren().add(r);
@@ -31,5 +31,13 @@ public class Game {
 
     public Pane getRootPane() {
         return rootPane;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public int getHeight() {
+        return height;
     }
 }
