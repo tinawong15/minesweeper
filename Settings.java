@@ -43,12 +43,7 @@ public class Settings extends Application {
         pane.add(tfHeight, 1, 4);
         pane.add(tfWidth, 2, 4);
         pane.add(tfBombs, 3, 4);
-        // pane.add(new Label("MI:"), 0, 1);
-        // pane.add(new TextField(), 1, 1);
-        // pane.add(new Label("Last Name:"), 0, 2);
-        // pane.add(new TextField(), 1, 2);
-        // Button btAdd = new Button("Add Name");
-        // pane.add(btAdd, 1, 3);
+
         Label directions = new Label("For custom: fill in fields then press \"Custom\" button.");
         pane.add(directions, 0,5,4,1);
         GridPane.setHalignment(directions, HPos.LEFT);
@@ -56,7 +51,7 @@ public class Settings extends Application {
         Stage secondStage = new Stage();
         beginner.setOnAction(e -> {
             Game game = new Game(9, 9, 10);
-            Scene secondScene = new Scene(game.getRootPane(), game.getWidth() * 50, game.getHeight() * 50);
+            Scene secondScene = new Scene(game.getRootPane(), game.getHeight() * 40 +10, game.getWidth() * 40 +10); // added a few pixels to adjust for margins
             secondStage.setScene(secondScene);
             secondStage.setX(primaryStage.getX() + 250);
             secondStage.setY(primaryStage.getY() + 100);
@@ -66,9 +61,9 @@ public class Settings extends Application {
 
         intermediate.setOnAction(e -> {
             Game game = new Game(16, 16, 40);
-            Scene secondScene = new Scene(game.getRootPane(), 200, 100);
+            Scene secondScene = new Scene(game.getRootPane(), game.getHeight() * 40 +20, game.getWidth() * 40 +20);
             secondStage.setScene(secondScene);
-            secondStage.setX(primaryStage.getX() + 250);
+            secondStage.setX(primaryStage.getX() + 200);
             secondStage.setY(primaryStage.getY() + 100);
             secondStage.setTitle("Minesweeper");
             secondStage.show();
@@ -76,7 +71,7 @@ public class Settings extends Application {
 
         expert.setOnAction(e -> {
             Game game = new Game(16, 30, 99);
-            Scene secondScene = new Scene(game.getRootPane(), 200, 100);
+            Scene secondScene = new Scene(game.getRootPane(), game.getHeight() * 40 +20, game.getWidth() * 40 +20);
             secondStage.setScene(secondScene);
             secondStage.setX(primaryStage.getX() + 250);
             secondStage.setY(primaryStage.getY() + 100);
@@ -89,7 +84,7 @@ public class Settings extends Application {
             int width = Integer.parseInt(tfWidth.getText());
             int bombs = Integer.parseInt(tfBombs.getText());
             Game game = new Game(height, width, bombs);
-            Scene secondScene = new Scene(game.getRootPane(), 200, 100);
+            Scene secondScene = new Scene(game.getRootPane(), game.getWidth() * 40 +10, game.getHeight() * 40 +10);
             secondStage.setScene(secondScene);
             secondStage.setX(primaryStage.getX() + 250);
             secondStage.setY(primaryStage.getY() + 100);

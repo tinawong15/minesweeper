@@ -5,26 +5,30 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.paint.Color;
+import javafx.scene.layout.GridPane;
+import javafx.geometry.Insets;
 
 public class Game {
     private int height;
     private int width;
     private int bombs;
+    private Square[][] grid;
 
-    private final Pane rootPane;
+    private final GridPane rootPane;
 
     public Game(int height, int width, int bombs) {
         this.height = height;
         this.width = width;
         this.bombs = bombs;
 
-        rootPane = new Pane();
-        for(int i = 0; i < height * 50; i+=50) {
-            for(int j = 0; j < width * 50; j+=50) {
-                Rectangle r = new Rectangle(i, j, 50, 50);
-                r.setStroke(Color.BLACK);
-                r.setFill(Color.WHITE);
-                rootPane.getChildren().add(r);
+        grid = new Square[height][width];
+        rootPane = new GridPane();
+        rootPane.setMaxSize(height * 40,width * 40);
+        for(int i = 0; i < height; i++) {
+            for(int j = 0; j < width; j++) {
+                Square s = new Square(i, j);
+                grid[i][j] = s;
+                rootPane.add(s, i, j);
             }
         }
     }
