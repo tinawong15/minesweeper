@@ -5,6 +5,9 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.control.*;
 import javafx.geometry.*;
 public class Settings extends Application {
+    Game game;
+    Square[][] grid;
+
     @Override
     public void start(Stage primaryStage) {
         // Create a pane and set its properties
@@ -50,7 +53,7 @@ public class Settings extends Application {
 
         Stage secondStage = new Stage();
         beginner.setOnAction(e -> {
-            Game game = new Game(9, 9, 10);
+            game = new Game(9, 9, 10);
             Scene secondScene = new Scene(game.getRootPane(), game.getHeight() * 40 +10, game.getWidth() * 40 +10); // added a few pixels to adjust for margins
             secondStage.setScene(secondScene);
             secondStage.setX(primaryStage.getX() + 250);
