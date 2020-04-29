@@ -8,6 +8,9 @@ import javafx.scene.paint.Color;
 import javafx.scene.layout.GridPane;
 import javafx.geometry.Insets;
 
+import java.util.ArrayList;
+import java.util.Random;
+
 public class Game {
     private int height;
     private int width;
@@ -22,8 +25,10 @@ public class Game {
         this.bombs = bombs;
 
         grid = new Square[height][width];
+
         rootPane = new GridPane();
         rootPane.setMaxSize(height * 40,width * 40);
+
         for(int i = 0; i < height; i++) {
             for(int j = 0; j < width; j++) {
                 Square s = new Square(i, j);
@@ -31,6 +36,8 @@ public class Game {
                 rootPane.add(s, i, j);
             }
         }
+
+        selectMines();
     }
 
     public Pane getRootPane() {
@@ -43,5 +50,29 @@ public class Game {
 
     public int getHeight() {
         return height;
+    }
+
+    public void selectMines() {
+        Random random = new Random();
+        ArrayList<Integer> chosenIndices = new ArrayList<Integer>();
+        int bombCount = 0;
+        while(bombCount != bombs) {
+            int index = random.nextInt(height * width);
+            if(!chosenIndices.contains(index)) {
+                chosenIndices.add(index);
+                bombCount++;
+            }
+        }
+        for(Integer chosenIndex : chosenIndices) {
+            int remainingIndex = chosenIndex;
+            int height = 0;
+            // convert index to its position in a 2D array to match the grid
+            while(remainingIndex >= width) {
+                remainingIndex -= width;
+                height++;
+            }
+            // System.out.println("i: "+height+" j: "+remainingIndex);
+            grid[height][remainingIndex].setIsMine(true);
+        }
     }
 }

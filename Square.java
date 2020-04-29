@@ -8,6 +8,7 @@ public class Square extends StackPane {
     Rectangle r = new Rectangle();
     int xcor;
     int ycor;
+    boolean isMine;
 
     public Square(int xcor, int ycor) {
         this.xcor = xcor;
@@ -20,5 +21,9 @@ public class Square extends StackPane {
         button.setMinHeight(35);
 		button.setMinWidth(35);
         this.getChildren().add(button);
+    }
+
+    public void setIsMine(boolean isMine) {
+        this.isMine = isMine;
     }
 }
