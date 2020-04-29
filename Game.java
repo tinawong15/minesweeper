@@ -27,7 +27,7 @@ public class Game {
         grid = new Square[height][width];
 
         rootPane = new GridPane();
-        rootPane.setMaxSize(height * 40,width * 40);
+        rootPane.setMaxSize(height * 40,width * 40); // adjust size to fit all Squares
 
         for(int i = 0; i < height; i++) {
             for(int j = 0; j < width; j++) {
@@ -57,8 +57,8 @@ public class Game {
         ArrayList<Integer> chosenIndices = new ArrayList<Integer>();
         int bombCount = 0;
         while(bombCount != bombs) {
-            int index = random.nextInt(height * width);
-            if(!chosenIndices.contains(index)) {
+            int index = random.nextInt(height * width); // converted 2D array length to 1D array to select random index from array
+            if(!chosenIndices.contains(index)) { // check if index was already selected to have a mine
                 chosenIndices.add(index);
                 bombCount++;
             }

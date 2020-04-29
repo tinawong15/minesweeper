@@ -15,11 +15,15 @@ public class Settings extends Application {
         pane.setAlignment(Pos.CENTER);
         pane.setHgap(5.5);
         pane.setVgap(5.5);
+
+        // ADD MENU DETAILS:
+
         // Place nodes in the pane at positions column,row
         pane.add(new Label("Height"), 1, 0);
         pane.add(new Label("Width"), 2, 0);
         pane.add(new Label("Bombs"), 3, 0);
-
+        
+        // Place buttons for user to select which level
         Button beginner = new Button("Beginner");
         Button intermediate = new Button("Intermediate");
         Button expert = new Button("Expert");
@@ -37,6 +41,8 @@ public class Settings extends Application {
         pane.add(new Label("16"), 1, 3);
         pane.add(new Label("30"), 2, 3);
         pane.add(new Label("99"), 3, 3);
+
+        // Allow user to choose grid size by providing text fields
         TextField tfHeight = new TextField();
         tfHeight.setMaxWidth(75);
         TextField tfWidth = new TextField();
@@ -51,6 +57,7 @@ public class Settings extends Application {
         pane.add(directions, 0,5,4,1);
         GridPane.setHalignment(directions, HPos.LEFT);
 
+        // Add new stage so new window with the game can pop up after user selects which level
         Stage secondStage = new Stage();
         beginner.setOnAction(e -> {
             game = new Game(9, 9, 10);
@@ -63,7 +70,7 @@ public class Settings extends Application {
         });
 
         intermediate.setOnAction(e -> {
-            Game game = new Game(16, 16, 40);
+            game = new Game(16, 16, 40);
             Scene secondScene = new Scene(game.getRootPane(), game.getHeight() * 40 +20, game.getWidth() * 40 +20);
             secondStage.setScene(secondScene);
             secondStage.setX(primaryStage.getX() + 200);
@@ -73,7 +80,7 @@ public class Settings extends Application {
         });
 
         expert.setOnAction(e -> {
-            Game game = new Game(16, 30, 99);
+            game = new Game(16, 30, 99);
             Scene secondScene = new Scene(game.getRootPane(), game.getHeight() * 40 +20, game.getWidth() * 40 +20);
             secondStage.setScene(secondScene);
             secondStage.setX(primaryStage.getX() + 250);
@@ -83,10 +90,11 @@ public class Settings extends Application {
         });
 
         custom.setOnAction(e -> {
+            // TODO: ADD EXCEPTION IF USER DOES NOT INPUT A NUMBER FOR HEIGHT AND/OR WIDTH
             int height = Integer.parseInt(tfHeight.getText());
             int width = Integer.parseInt(tfWidth.getText());
             int bombs = Integer.parseInt(tfBombs.getText());
-            Game game = new Game(height, width, bombs);
+            game = new Game(height, width, bombs);
             Scene secondScene = new Scene(game.getRootPane(), game.getWidth() * 40 +10, game.getHeight() * 40 +10);
             secondStage.setScene(secondScene);
             secondStage.setX(primaryStage.getX() + 250);
