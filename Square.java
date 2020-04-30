@@ -76,8 +76,20 @@ public class Square extends StackPane {
                 else if(neighborsMineCount == 3) {
                     numberMinesAdjacent.setFill(Color.RED);
                 }
-                else { // neighborsMineCount == 4
+                else if(neighborsMineCount == 4) {
+                    numberMinesAdjacent.setFill(Color.DARKSLATEBLUE);
+                }
+                else if(neighborsMineCount == 5) {
+                    numberMinesAdjacent.setFill(Color.DARKRED);
+                }
+                else if(neighborsMineCount == 6) {
                     numberMinesAdjacent.setFill(Color.PURPLE);
+                }
+                else if(neighborsMineCount == 7) {
+                    numberMinesAdjacent.setFill(Color.SPRINGGREEN);
+                }
+                else { // neighborsMineCount == 8
+                    numberMinesAdjacent.setFill(Color.DARKRED);
                 }
             }
         }

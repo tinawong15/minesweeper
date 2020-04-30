@@ -95,5 +95,17 @@ public class Game {
         if(j+1 < width) {
             grid[i][j].getNeighbors().add(grid[i][j+1]);
         }
+        if(i-1 >= 0 && j-1 >= 0) {
+            grid[i][j].getNeighbors().add(grid[i-1][j-1]);
+        }
+        if(i+1 < height && j-1 >= 0) {
+            grid[i][j].getNeighbors().add(grid[i+1][j-1]);
+        }
+        if(i-1 >= 0 && j+1 < width) {
+            grid[i][j].getNeighbors().add(grid[i-1][j+1]);
+        }
+        if(i+1 < height && j+1 < width) {
+            grid[i][j].getNeighbors().add(grid[i+1][j+1]);
+        }
     }
 }
