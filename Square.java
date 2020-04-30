@@ -19,7 +19,7 @@ public class Square extends StackPane {
     int ycor;
     boolean isMine;
     Text numberMinesAdjacent = new Text();
-    ArrayList<Square> neighbors = new ArrayList<Square>(); // TODO
+    ArrayList<Square> neighbors = new ArrayList<Square>();
 
     public Square(int xcor, int ycor) {
         this.xcor = xcor;
@@ -60,5 +60,9 @@ public class Square extends StackPane {
 
     public Button getButton() {
         return button;
+    }
+
+    public ArrayList<Square> getNeighbors() {
+        return neighbors;
     }
 }

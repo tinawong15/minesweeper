@@ -38,6 +38,12 @@ public class Game {
         }
 
         selectMines();
+
+        for(int i = 0; i < height; i++) {
+            for(int j = 0; j < width; j++) {
+                addNeighbors(i, j);
+            }
+        }
     }
 
     public Pane getRootPane() {
@@ -73,6 +79,21 @@ public class Game {
             }
             // System.out.println("i: "+height+" j: "+remainingIndex);
             grid[height][remainingIndex].setIsMine(true);
+        }
+    }
+
+    public void addNeighbors(int i, int j) {
+        if(i-1 >= 0) {
+            grid[i][j].getNeighbors().add(grid[i-1][j]);
+        }
+        if(j-1 >= 0) {
+            grid[i][j].getNeighbors().add(grid[i][j-1]);
+        }
+        if(i+1 < height) {
+            grid[i][j].getNeighbors().add(grid[i+1][j]);
+        }
+        if(j+1 < width) {
+            grid[i][j].getNeighbors().add(grid[i][j+1]);
         }
     }
 }
