@@ -32,13 +32,6 @@ public class Square extends StackPane {
         r.setFill(Color.WHITE);
         this.getChildren().add(r);
 
-        // TEMP until neighbors are added so proper numbers can be added
-        numberMinesAdjacent.setText("4");
-        numberMinesAdjacent.setFill(Color.BLUE);
-        Font font = Font.font("Arial", FontWeight.BOLD, FontPosture.REGULAR, 20);
-        numberMinesAdjacent.setFont(font);
-        this.getChildren().add(numberMinesAdjacent);
-
         // add buttons for user to click within each of the Squares
         button.setMinHeight(35);
         button.setMinWidth(35);
@@ -53,9 +46,44 @@ public class Square extends StackPane {
         this.isMine = isMine;
     }
 
+    public boolean getIsMine() {
+        return isMine;
+    }
+
     public void removeButton() {
         // System.out.println("testing1");
         this.getChildren().remove(button);
+        // once button is revealed, show text
+        if(isMine) { // show that Square is a mine
+            numberMinesAdjacent.setText("X");
+            numberMinesAdjacent.setFill(Color.CRIMSON);
+        }
+        else { // show how many Square neighbors of the Square are mines
+            int neighborsMineCount = 0;
+            for(Square neighbor : neighbors) {
+                if(neighbor.getIsMine()) {
+                    neighborsMineCount++;
+                }
+            }
+            if(neighborsMineCount != 0) {
+                numberMinesAdjacent.setText(Integer.toString(neighborsMineCount));
+                if(neighborsMineCount == 1) {
+                    numberMinesAdjacent.setFill(Color.BLUE);
+                }
+                else if(neighborsMineCount == 2) {
+                    numberMinesAdjacent.setFill(Color.GREEN);
+                }
+                else if(neighborsMineCount == 3) {
+                    numberMinesAdjacent.setFill(Color.RED);
+                }
+                else { // neighborsMineCount == 4
+                    numberMinesAdjacent.setFill(Color.PURPLE);
+                }
+            }
+        }
+        Font font = Font.font("Arial", FontWeight.BOLD, FontPosture.REGULAR, 20);
+        numberMinesAdjacent.setFont(font);
+        this.getChildren().add(numberMinesAdjacent);
     }
 
     public Button getButton() {
