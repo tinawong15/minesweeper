@@ -18,6 +18,7 @@ public class Square extends StackPane {
     int xcor;
     int ycor;
     boolean isMine;
+    boolean visited = false;
     Text numberMinesAdjacent = new Text();
     ArrayList<Square> neighbors = new ArrayList<Square>();
 
@@ -52,50 +53,59 @@ public class Square extends StackPane {
 
     public void removeButton() {
         // System.out.println("testing1");
-        this.getChildren().remove(button);
         // once button is revealed, show text
-        if(isMine) { // show that Square is a mine
-            numberMinesAdjacent.setText("X");
-            numberMinesAdjacent.setFill(Color.CRIMSON);
-        }
-        else { // show how many Square neighbors of the Square are mines
-            int neighborsMineCount = 0;
-            for(Square neighbor : neighbors) {
-                if(neighbor.getIsMine()) {
-                    neighborsMineCount++;
+        if(!visited){
+            this.getChildren().remove(button);
+            if(isMine) { // show that Square is a mine
+                visited = true;
+                numberMinesAdjacent.setText("X");
+                numberMinesAdjacent.setFill(Color.CRIMSON);
+            }
+            else { // show how many Square neighbors of the Square are mines
+                visited = true;
+                int neighborsMineCount = 0;
+                for(Square neighbor : neighbors) {
+                    if(neighbor.getIsMine()) {
+                        neighborsMineCount++;
+                    }
+                }
+                if(neighborsMineCount == 0){
+                    for(Square neighbor:neighbors){
+                        neighbor.removeButton();
+                    }
+                }
+                else{
+                    numberMinesAdjacent.setText(Integer.toString(neighborsMineCount));
+                    if(neighborsMineCount == 1) {
+                        numberMinesAdjacent.setFill(Color.BLUE);
+                    }
+                    else if(neighborsMineCount == 2) {
+                        numberMinesAdjacent.setFill(Color.GREEN);
+                    }
+                    else if(neighborsMineCount == 3) {
+                        numberMinesAdjacent.setFill(Color.RED);
+                    }
+                    else if(neighborsMineCount == 4) {
+                        numberMinesAdjacent.setFill(Color.DARKSLATEBLUE);
+                    }
+                    else if(neighborsMineCount == 5) {
+                        numberMinesAdjacent.setFill(Color.DARKRED);
+                    }
+                    else if(neighborsMineCount == 6) {
+                        numberMinesAdjacent.setFill(Color.PURPLE);
+                    }
+                    else if(neighborsMineCount == 7) {
+                        numberMinesAdjacent.setFill(Color.SPRINGGREEN);
+                    }
+                    else { // neighborsMineCount == 8
+                        numberMinesAdjacent.setFill(Color.DARKRED);
+                    }
                 }
             }
-            if(neighborsMineCount != 0) {
-                numberMinesAdjacent.setText(Integer.toString(neighborsMineCount));
-                if(neighborsMineCount == 1) {
-                    numberMinesAdjacent.setFill(Color.BLUE);
-                }
-                else if(neighborsMineCount == 2) {
-                    numberMinesAdjacent.setFill(Color.GREEN);
-                }
-                else if(neighborsMineCount == 3) {
-                    numberMinesAdjacent.setFill(Color.RED);
-                }
-                else if(neighborsMineCount == 4) {
-                    numberMinesAdjacent.setFill(Color.DARKSLATEBLUE);
-                }
-                else if(neighborsMineCount == 5) {
-                    numberMinesAdjacent.setFill(Color.DARKRED);
-                }
-                else if(neighborsMineCount == 6) {
-                    numberMinesAdjacent.setFill(Color.PURPLE);
-                }
-                else if(neighborsMineCount == 7) {
-                    numberMinesAdjacent.setFill(Color.SPRINGGREEN);
-                }
-                else { // neighborsMineCount == 8
-                    numberMinesAdjacent.setFill(Color.DARKRED);
-                }
-            }
-        }
-        Font font = Font.font("Arial", FontWeight.BOLD, FontPosture.REGULAR, 20);
-        numberMinesAdjacent.setFont(font);
-        this.getChildren().add(numberMinesAdjacent);
+            Font font = Font.font("Arial", FontWeight.BOLD, FontPosture.REGULAR, 20);
+            numberMinesAdjacent.setFont(font);
+            this.getChildren().add(numberMinesAdjacent);
+    }
     }
 
     public Button getButton() {
@@ -105,4 +115,17 @@ public class Square extends StackPane {
     public ArrayList<Square> getNeighbors() {
         return neighbors;
     }
+
+    // public void checkBlanks(){
+    //     this.removeButton();
+    //     System.out.println(this.numberMinesAdjacent.getText());
+    //     if(Integer.parseInt(this.numberMinesAdjacent.getText()) != 0){
+    //         return;
+    //     }
+    //     else {
+    //         for(Square neighbor:neighbors){
+    //             this.checkBlanks();
+    //         }
+    //     }
+    // }
 }
