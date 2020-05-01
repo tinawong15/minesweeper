@@ -1,3 +1,5 @@
+import java.util.InputMismatchException;
+
 import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
@@ -90,17 +92,20 @@ public class Settings extends Application {
         });
 
         custom.setOnAction(e -> {
-            // TODO: ADD EXCEPTION IF USER DOES NOT INPUT A NUMBER FOR HEIGHT AND/OR WIDTH
-            int height = Integer.parseInt(tfHeight.getText());
-            int width = Integer.parseInt(tfWidth.getText());
-            int bombs = Integer.parseInt(tfBombs.getText());
-            game = new Game(height, width, bombs);
-            Scene secondScene = new Scene(game.getRootPane(), game.getWidth() * 40 +10, game.getHeight() * 40 +10);
-            secondStage.setScene(secondScene);
-            secondStage.setX(primaryStage.getX() + 250);
-            secondStage.setY(primaryStage.getY() + 100);
-            secondStage.setTitle("Minesweeper");
-            secondStage.show();
+            try {
+                int height = Integer.parseInt(tfHeight.getText());
+                int width = Integer.parseInt(tfWidth.getText());
+                int bombs = Integer.parseInt(tfBombs.getText());
+                game = new Game(height, width, bombs);
+                Scene secondScene = new Scene(game.getRootPane(), game.getWidth() * 40 +10, game.getHeight() * 40 +10);
+                secondStage.setScene(secondScene);
+                secondStage.setX(primaryStage.getX() + 250);
+                secondStage.setY(primaryStage.getY() + 100);
+                secondStage.setTitle("Minesweeper");
+                secondStage.show();
+            } catch (NumberFormatException ex) {
+                System.out.println("Only integers are accepted. Please enter an integer for each of the fields.");
+            }
         });
 
         // Create a scene and place it in the stage
