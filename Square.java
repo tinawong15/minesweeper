@@ -50,6 +50,18 @@ public class Square extends StackPane {
     public boolean getIsMine() {
         return isMine;
     }
+    
+    public boolean getVisited() {
+        return visited;
+    }
+
+    public int getXcor() {
+        return xcor;
+    }
+
+    public int getYcor() {
+        return ycor;
+    }
 
     public void removeButton() {
         // System.out.println("testing1");
@@ -58,11 +70,13 @@ public class Square extends StackPane {
             this.getChildren().remove(button);
             if(isMine) { // show that Square is a mine
                 visited = true;
+                Game.lose();
                 numberMinesAdjacent.setText("X");
                 numberMinesAdjacent.setFill(Color.CRIMSON);
             }
             else { // show how many Square neighbors of the Square are mines
                 visited = true;
+                Game.visitedSquares.add(this);
                 int neighborsMineCount = 0;
                 for(Square neighbor : neighbors) {
                     if(neighbor.getIsMine()) {
@@ -105,7 +119,11 @@ public class Square extends StackPane {
             Font font = Font.font("Arial", FontWeight.BOLD, FontPosture.REGULAR, 20);
             numberMinesAdjacent.setFont(font);
             this.getChildren().add(numberMinesAdjacent);
-    }
+
+            if(Game.getHeight() * Game.getWidth() - Game.visitedSquares.size() == Game.bombs) {
+                Game.win();
+            }
+        }
     }
 
     public Button getButton() {

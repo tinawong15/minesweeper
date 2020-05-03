@@ -9,20 +9,26 @@ import javafx.scene.layout.GridPane;
 import javafx.geometry.Insets;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.Random;
 
 public class Game {
-    private int height;
-    private int width;
-    private int bombs;
+    private static int height;
+    private static int width;
+    
+    static int bombs;
+    static Set<Square> visitedSquares = new HashSet<Square>(); // includes all Squares that have been visited, except mines
+
     private Square[][] grid;
 
     private final GridPane rootPane;
 
     public Game(int height, int width, int bombs) {
-        this.height = height;
-        this.width = width;
-        this.bombs = bombs;
+        Game.height = height;
+        Game.width = width;
+        
+        Game.bombs = bombs;
 
         grid = new Square[height][width];
 
@@ -50,11 +56,11 @@ public class Game {
         return rootPane;
     }
 
-    public int getWidth() {
+    public static int getWidth() {
         return width;
     }
 
-    public int getHeight() {
+    public static int getHeight() {
         return height;
     }
 
@@ -107,5 +113,13 @@ public class Game {
         if(i+1 < height && j+1 < width) {
             grid[i][j].getNeighbors().add(grid[i+1][j+1]);
         }
+    }
+
+    public static void win() {
+        System.out.println("You win!");
+    }
+
+    public static void lose() {
+        System.out.println("Game over! You lose!");
     }
 }
