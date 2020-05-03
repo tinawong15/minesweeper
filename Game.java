@@ -7,6 +7,10 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.paint.Color;
 import javafx.scene.layout.GridPane;
 import javafx.geometry.Insets;
+import javafx.scene.text.Text; 
+import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -17,12 +21,14 @@ public class Game {
     private static int height;
     private static int width;
     
+    private static boolean isWon = false;
+
     static int bombs;
     static Set<Square> visitedSquares = new HashSet<Square>(); // includes all Squares that have been visited, except mines
 
     private Square[][] grid;
 
-    private final GridPane rootPane;
+    private static GridPane rootPane;
 
     public Game(int height, int width, int bombs) {
         Game.height = height;
@@ -116,10 +122,15 @@ public class Game {
     }
 
     public static void win() {
+        isWon = true;
         System.out.println("You win!");
+        rootPane.getChildren().clear();
+        rootPane.add(new Text("You win!"), height/2, width/2);
     }
 
     public static void lose() {
         System.out.println("Game over! You lose!");
+        rootPane.getChildren().clear();
+        rootPane.add(new Text("Game over! You lose!"), height/2, width/2);
     }
 }
