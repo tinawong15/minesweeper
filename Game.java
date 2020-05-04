@@ -21,8 +21,6 @@ public class Game {
     private static int height;
     private static int width;
     
-    private static boolean isWon = false;
-
     static int bombs;
     static Set<Square> visitedSquares = new HashSet<Square>(); // includes all Squares that have been visited, except mines
 
@@ -122,15 +120,24 @@ public class Game {
     }
 
     public static void win() {
-        isWon = true;
         System.out.println("You win!");
         rootPane.getChildren().clear();
         rootPane.add(new Text("You win!"), height/2, width/2);
+        // can we close the settings window once we start a game, and add a button here
+        // and for lose to take u back to settings to start a new game
+        resetGame();
     }
 
     public static void lose() {
         System.out.println("Game over! You lose!");
         rootPane.getChildren().clear();
         rootPane.add(new Text("Game over! You lose!"), height/2, width/2);
+        resetGame();
+    }
+
+    private static void resetGame(){
+        bombs = 0;
+        visitedSquares = new HashSet<Square>();
+        rootPane = new GridPane();
     }
 }
