@@ -1,11 +1,10 @@
-import java.util.InputMismatchException;
-
 import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.layout.GridPane;
 import javafx.scene.control.*;
 import javafx.geometry.*;
+
 public class Main extends Application {
     Game game;
     Square[][] grid;
@@ -61,9 +60,11 @@ public class Main extends Application {
 
         // Add new stage so new window with the game can pop up after user selects which level
         Stage secondStage = new Stage();
+        // GridPane rootPane = new GridPane();
         beginner.setOnAction(e -> {
             game = new Game(9, 9, 10);
-            Scene secondScene = new Scene(game.getRootPane(), game.getHeight() * 40 +10, game.getWidth() * 40 +10); // added a few pixels to adjust for margins
+            Scene secondScene = new Scene(Game.getRootPane(), Game.getHeight() * 40 +10, Game.getWidth() * 40 +10); // added a few pixels to adjust for margins
+            // Scene secondScene = new Scene()
             secondStage.setScene(secondScene);
             secondStage.setX(primaryStage.getX() + 250);
             secondStage.setY(primaryStage.getY() + 100);
@@ -73,7 +74,7 @@ public class Main extends Application {
 
         intermediate.setOnAction(e -> {
             game = new Game(16, 16, 40);
-            Scene secondScene = new Scene(game.getRootPane(), game.getHeight() * 40 +20, game.getWidth() * 40 +20);
+            Scene secondScene = new Scene(Game.getRootPane(), Game.getHeight() * 40 +20, Game.getWidth() * 40 +20);
             secondStage.setScene(secondScene);
             secondStage.setX(primaryStage.getX() + 200);
             secondStage.setY(primaryStage.getY() + 100);
@@ -83,7 +84,7 @@ public class Main extends Application {
 
         expert.setOnAction(e -> {
             game = new Game(16, 30, 99);
-            Scene secondScene = new Scene(game.getRootPane(), game.getHeight() * 40 +20, game.getWidth() * 40 +20);
+            Scene secondScene = new Scene(Game.getRootPane(), Game.getHeight() * 40 +20, Game.getWidth() * 40 +20);
             secondStage.setScene(secondScene);
             secondStage.setX(primaryStage.getX() + 250);
             secondStage.setY(primaryStage.getY() + 100);
@@ -97,7 +98,7 @@ public class Main extends Application {
                 int width = Integer.parseInt(tfWidth.getText());
                 int bombs = Integer.parseInt(tfBombs.getText());
                 game = new Game(height, width, bombs);
-                Scene secondScene = new Scene(game.getRootPane(), game.getWidth() * 40 +10, game.getHeight() * 40 +10);
+                Scene secondScene = new Scene(Game.getRootPane(), Game.getWidth() * 40 +10, Game.getHeight() * 40 +10);
                 secondStage.setScene(secondScene);
                 secondStage.setX(primaryStage.getX() + 250);
                 secondStage.setY(primaryStage.getY() + 100);

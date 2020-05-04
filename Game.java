@@ -7,6 +7,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.paint.Color;
 import javafx.scene.layout.GridPane;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.text.Text; 
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
@@ -21,8 +22,8 @@ public class Game {
     private static int height;
     private static int width;
     
-    static int bombs;
-    static Set<Square> visitedSquares = new HashSet<Square>(); // includes all Squares that have been visited, except mines
+    private static int bombs;
+    private static Set<Square> visitedSquares = new HashSet<Square>(); // includes all Squares that have been visited, except mines
 
     private Square[][] grid;
 
@@ -56,8 +57,12 @@ public class Game {
         }
     }
 
-    public Pane getRootPane() {
+    public static Pane getRootPane() {
         return rootPane;
+    }
+
+    public static Set<Square> getVisitedSquares() {
+        return visitedSquares;
     }
 
     public static int getWidth() {
@@ -66,6 +71,10 @@ public class Game {
 
     public static int getHeight() {
         return height;
+    }
+
+    public static int getBombs() {
+        return bombs;
     }
 
     public void selectMines() {
@@ -120,11 +129,10 @@ public class Game {
     }
 
     public static void win() {
-        System.out.println("You win!");
+        System.out.println("Congratulations! You win!");
         rootPane.getChildren().clear();
-        rootPane.add(new Text("You win!"), height/2, width/2);
-        // can we close the settings window once we start a game, and add a button here
-        // and for lose to take u back to settings to start a new game
+        rootPane.add(new Text("Congratulations! You win!"), height/2, width/2);
+        rootPane.setAlignment(Pos.CENTER);
         resetGame();
     }
 
@@ -132,6 +140,7 @@ public class Game {
         System.out.println("Game over! You lose!");
         rootPane.getChildren().clear();
         rootPane.add(new Text("Game over! You lose!"), height/2, width/2);
+        rootPane.setAlignment(Pos.CENTER);
         resetGame();
     }
 

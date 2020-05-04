@@ -76,7 +76,7 @@ public class Square extends StackPane {
             }
             else { // show how many Square neighbors of the Square are mines
                 visited = true;
-                Game.visitedSquares.add(this);
+                Game.getVisitedSquares().add(this);
                 int neighborsMineCount = 0;
                 for(Square neighbor : neighbors) {
                     if(neighbor.getIsMine()) {
@@ -120,7 +120,7 @@ public class Square extends StackPane {
             numberMinesAdjacent.setFont(font);
             this.getChildren().add(numberMinesAdjacent);
 
-            if(Game.getHeight() * Game.getWidth() - Game.visitedSquares.size() == Game.bombs) {
+            if(Game.getHeight() * Game.getWidth() - Game.getVisitedSquares().size() == Game.getBombs()) {
                 Game.win();
             }
         }
@@ -133,17 +133,4 @@ public class Square extends StackPane {
     public ArrayList<Square> getNeighbors() {
         return neighbors;
     }
-
-    // public void checkBlanks(){
-    //     this.removeButton();
-    //     System.out.println(this.numberMinesAdjacent.getText());
-    //     if(Integer.parseInt(this.numberMinesAdjacent.getText()) != 0){
-    //         return;
-    //     }
-    //     else {
-    //         for(Square neighbor:neighbors){
-    //             this.checkBlanks();
-    //         }
-    //     }
-    // }
 }
