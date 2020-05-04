@@ -6,7 +6,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.GridPane;
 import javafx.scene.control.*;
 import javafx.geometry.*;
-public class Settings extends Application {
+public class Main extends Application {
     Game game;
     Square[][] grid;
 
