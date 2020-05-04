@@ -1,17 +1,7 @@
-import javafx.application.Application;
-import javafx.stage.Stage;
-import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.shape.Rectangle;
-import javafx.scene.paint.Color;
 import javafx.scene.layout.GridPane;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.text.Text; 
-import javafx.scene.text.Font;
-import javafx.scene.text.FontPosture;
-import javafx.scene.text.FontWeight;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -133,7 +123,7 @@ public class Game {
         rootPane.getChildren().clear();
         rootPane.add(new Text("Congratulations! You win!"), height/2, width/2);
         rootPane.setAlignment(Pos.CENTER);
-        resetGame();
+        resetGame(); // reset all used variables so user can replay game, as long as they do not close the menu settings while game is playing
     }
 
     public static void lose() {
@@ -141,10 +131,10 @@ public class Game {
         rootPane.getChildren().clear();
         rootPane.add(new Text("Game over! You lose!"), height/2, width/2);
         rootPane.setAlignment(Pos.CENTER);
-        resetGame();
+        resetGame(); // reset all used variables so user can replay game, as long as they do not close the menu settings while game is playing
     }
 
-    private static void resetGame(){
+    public static void resetGame(){
         bombs = 0;
         visitedSquares = new HashSet<Square>();
         rootPane = new GridPane();

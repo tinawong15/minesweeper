@@ -5,7 +5,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.control.*;
 import javafx.geometry.*;
 
-public class Main extends Application {
+public class Main extends Application { // RUN THIS CLASS TO START GAME
     Game game;
     Square[][] grid;
 
@@ -60,11 +60,10 @@ public class Main extends Application {
 
         // Add new stage so new window with the game can pop up after user selects which level
         Stage secondStage = new Stage();
-        // GridPane rootPane = new GridPane();
         beginner.setOnAction(e -> {
+            Game.resetGame();
             game = new Game(9, 9, 10);
             Scene secondScene = new Scene(Game.getRootPane(), Game.getHeight() * 40 +10, Game.getWidth() * 40 +10); // added a few pixels to adjust for margins
-            // Scene secondScene = new Scene()
             secondStage.setScene(secondScene);
             secondStage.setX(primaryStage.getX() + 250);
             secondStage.setY(primaryStage.getY() + 100);
@@ -73,6 +72,7 @@ public class Main extends Application {
         });
 
         intermediate.setOnAction(e -> {
+            Game.resetGame();
             game = new Game(16, 16, 40);
             Scene secondScene = new Scene(Game.getRootPane(), Game.getHeight() * 40 +20, Game.getWidth() * 40 +20);
             secondStage.setScene(secondScene);
@@ -83,6 +83,7 @@ public class Main extends Application {
         });
 
         expert.setOnAction(e -> {
+            Game.resetGame();
             game = new Game(16, 30, 99);
             Scene secondScene = new Scene(Game.getRootPane(), Game.getHeight() * 40 +20, Game.getWidth() * 40 +20);
             secondStage.setScene(secondScene);
@@ -97,6 +98,7 @@ public class Main extends Application {
                 int height = Integer.parseInt(tfHeight.getText());
                 int width = Integer.parseInt(tfWidth.getText());
                 int bombs = Integer.parseInt(tfBombs.getText());
+                Game.resetGame();
                 game = new Game(height, width, bombs);
                 Scene secondScene = new Scene(Game.getRootPane(), Game.getWidth() * 40 +10, Game.getHeight() * 40 +10);
                 secondStage.setScene(secondScene);

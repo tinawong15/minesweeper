@@ -2,8 +2,6 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.control.Button;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.paint.Color;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 
 import javafx.scene.text.Text; 
 import javafx.scene.text.Font;
@@ -64,7 +62,6 @@ public class Square extends StackPane {
     }
 
     public void removeButton() {
-        // System.out.println("testing1");
         // once button is revealed, show text
         if(!visited){
             this.getChildren().remove(button);
