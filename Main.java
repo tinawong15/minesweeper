@@ -100,7 +100,7 @@ public class Main extends Application { // RUN THIS CLASS TO START GAME
                 int height = Integer.parseInt(tfHeight.getText());
                 int width = Integer.parseInt(tfWidth.getText());
                 int bombs = Integer.parseInt(tfBombs.getText());
-                if(bombs < height * width) {
+                if(bombs >= 0 && bombs < height * width) {
                     Game.resetGame();
                     game = new Game(height, width, bombs);
                     Scene secondScene = new Scene(Game.getRootPane(), Game.getWidth() * 40 +10, Game.getHeight() * 40 +10);
@@ -111,10 +111,12 @@ public class Main extends Application { // RUN THIS CLASS TO START GAME
                     secondStage.show();
                 }
                 else {
-                    System.out.println("Number of bombs must be less than height * width. Please try again.");
+                    System.out.println("Number of bombs must be less than height * width and greater than or equal to 0. Please try again.");
                 }
             } catch (NumberFormatException ex) {
                 System.out.println("Only integers are accepted. Please enter an integer for each of the fields.");
+            } catch (NegativeArraySizeException ex) {
+                System.out.println("Only positive integers are accepted. Please try again.");
             }
         });
 
