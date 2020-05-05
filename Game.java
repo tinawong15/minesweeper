@@ -70,26 +70,52 @@ public class Game {
 
     public static void selectMines() {
         Random random = new Random();
-        ArrayList<Integer> chosenIndices = new ArrayList<Integer>();
+        ArrayList<Integer> chosenHeight = new ArrayList<Integer>();
+        ArrayList<Integer> chosenWidth = new ArrayList<Integer>();
         int bombCount = 0;
-        while(bombCount != bombs) {
-            int index = random.nextInt(height * width); // converted 2D array length to 1D array to select random index from array
-            if(!chosenIndices.contains(index)) { // check if index was already selected to have a mine
-                chosenIndices.add(index);
+        int randHeight;
+        int randWidth;
+        boolean exists = false;
+        while(bombCount != bombs){
+            exists = false;
+            randHeight = random.nextInt(height);
+            randWidth = random.nextInt(width);
+            for(int k = 0; k < chosenHeight.size(); k++){
+                if(randHeight == chosenHeight.get(k) && randWidth == chosenWidth.get(k)){
+                    exists = true;
+                    break;
+                }
+            }
+            if(!exists){
+                chosenHeight.add(randHeight);
+                chosenWidth.add(randWidth);
                 bombCount++;
             }
         }
-        for(Integer chosenIndex : chosenIndices) {
-            int remainingIndex = chosenIndex;
-            int height = 0;
-            // convert index to its position in a 2D array to match the grid
-            while(remainingIndex >= width) {
-                remainingIndex -= width;
-                height++;
-            }
-            // System.out.println("i: "+height+" j: "+remainingIndex);
-            grid[height][remainingIndex].setIsMine(true);
+
+        for(int l = 0; l < chosenHeight.size(); l++){
+            grid[chosenHeight.get(l)][chosenWidth.get(l)].setIsMine(true);
         }
+        // ArrayList<Integer> chosenIndices = new ArrayList<Integer>();
+        // int bombCount = 0;
+        // while(bombCount != bombs) {
+        //     int index = random.nextInt(height * width); // converted 2D array length to 1D array to select random index from array
+        //     if(!chosenIndices.contains(index)) { // check if index was already selected to have a mine
+        //         chosenIndices.add(index);
+        //         bombCount++;
+        //     }
+        // }
+        // for(Integer chosenIndex : chosenIndices) {
+        //     int remainingIndex = chosenIndex;
+        //     int height = 0;
+        //     // convert index to its position in a 2D array to match the grid
+        //     while(remainingIndex >= width) {
+        //         remainingIndex -= width;
+        //         height++;
+        //     }
+        //     // System.out.println("i: "+height+" j: "+remainingIndex);
+        //     grid[height][remainingIndex].setIsMine(true);
+        // }
     }
 
     public static void selectMines(int i, int j) {
@@ -101,33 +127,33 @@ public class Game {
         }
         // try random generation again
         Random random = new Random();
-        ArrayList<Integer> chosenX = new ArrayList<Integer>();
-        ArrayList<Integer> chosenY = new ArrayList<Integer>();
+        ArrayList<Integer> chosenHeight = new ArrayList<Integer>();
+        ArrayList<Integer> chosenWidth = new ArrayList<Integer>();
         int bombCount = 0;
-        int randX;
-        int randY;
+        int randHeight;
+        int randWidth;
         boolean exists = false;
         while(bombCount != bombs){
             exists = false;
-            randX = random.nextInt(width);
-            randY = random.nextInt(height);
-            if(i != randX|| j != randY ){
-                for(int k = 0;k<chosenX.size();k++){
-                    if(randX == chosenX.get(k) && randY == chosenY.get(k)){
+            randHeight = random.nextInt(height);
+            randWidth = random.nextInt(width);
+            if(i != randHeight || j != randWidth ){
+                for(int k = 0; k < chosenHeight.size(); k++){
+                    if(randHeight == chosenHeight.get(k) && randWidth == chosenWidth.get(k)){
                         exists = true;
                         break;
                     }
                 }
                 if(!exists){
-                    chosenX.add(randX);
-                    chosenY.add(randY);
+                    chosenHeight.add(randHeight);
+                    chosenWidth.add(randWidth);
                     bombCount++;
                 }
             }
         }
 
-        for(int l = 0;l<chosenX.size();l++){
-            grid[chosenX.get(l)][chosenY.get(l)].setIsMine(true);
+        for(int l = 0; l < chosenHeight.size(); l++){
+            grid[chosenHeight.get(l)][chosenWidth.get(l)].setIsMine(true);
         }
         // ArrayList<Integer> chosenIndices = new ArrayList<Integer>();
         // int bombCount = 0;
