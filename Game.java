@@ -6,9 +6,15 @@
  */
 
 import javafx.scene.layout.Pane;
+import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
+import javafx.application.Platform;
 import javafx.geometry.Pos;
 import javafx.scene.text.Text; 
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -197,20 +203,60 @@ public class Game {
 
     // Ran when the game is won by the user
     public static void win() {
-        System.out.println("Congratulations! You win!");
-        rootPane.getChildren().clear();
-        rootPane.add(new Text("Congratulations! You win!"), height/2, width/2);
-        rootPane.setAlignment(Pos.CENTER);
-        resetGame(); // reset all used variables so user can replay game, as long as they do not close the menu settings while game is playing
-    }
+        for(int k = 0; k < height; k++) {
+            for(int m = 0; m < width; m++) {
+                if(grid[k][m].getIsMine()){
+                    grid[k][m].numberMinesAdjacent.setText("X");
+                    grid[k][m].numberMinesAdjacent.setFill(Color.CRIMSON);
+                    Font font = Font.font("Arial", FontWeight.BOLD, FontPosture.REGULAR, 20);
+                    grid[k][m].numberMinesAdjacent.setFont(font);
+                    grid[k][m].getChildren().add(grid[k][m].numberMinesAdjacent);
+                    grid[k][m].getChildren().remove(grid[k][m].button);
+                }
+            }
+        }
+
+        new java.util.Timer().schedule( new java.util.TimerTask() {
+            public void run() {
+                Platform.runLater(new Runnable(){
+                    public void run(){
+                        System.out.println("Congratulations! You win!");
+                        rootPane.getChildren().clear();
+                        rootPane.add(new Text("Congratulations! You win!"), height/2, width/2);
+                        rootPane.setAlignment(Pos.CENTER);
+                        resetGame(); // reset all used variables so user can replay game, as long as they do not close the menu settings while game is playing                 
+                    }});
+            }
+        }, 3000 );
+
+        }
 
     // Ran when the game is lost by the user
     public static void lose() {
-        System.out.println("Game over! You lose!");
-        rootPane.getChildren().clear();
-        rootPane.add(new Text("Game over! You lose!"), height/2, width/2);
-        rootPane.setAlignment(Pos.CENTER);
-        resetGame(); // reset all used variables so user can replay game, as long as they do not close the menu settings while game is playing
+        for(int k = 0; k < height; k++) {
+            for(int m = 0; m < width; m++) {
+                if(grid[k][m].getIsMine()){
+                    grid[k][m].numberMinesAdjacent.setText("X");
+                    grid[k][m].numberMinesAdjacent.setFill(Color.CRIMSON);
+                    Font font = Font.font("Arial", FontWeight.BOLD, FontPosture.REGULAR, 20);
+                    grid[k][m].numberMinesAdjacent.setFont(font);
+                    grid[k][m].getChildren().add(grid[k][m].numberMinesAdjacent);
+                    grid[k][m].getChildren().remove(grid[k][m].button);
+                }
+            }
+        }
+        new java.util.Timer().schedule( new java.util.TimerTask() {
+            public void run() {
+                Platform.runLater(new Runnable(){
+                    public void run(){
+                        System.out.println("Game over! You lose!");
+                        rootPane.getChildren().clear();
+                        rootPane.add(new Text("Game over! You lose!"), height/2, width/2);
+                        rootPane.setAlignment(Pos.CENTER);
+                        resetGame(); // reset all used variables so user can replay game, as long as they do not close the menu settings while game is playing
+                }});
+            }
+        }, 3000 );
     }
 
     // Resets all necessary parameters of the game once a game has been won or lost

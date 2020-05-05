@@ -110,6 +110,7 @@ public class Square extends StackPane {
                 Game.lose();
                 numberMinesAdjacent.setText("X");
                 numberMinesAdjacent.setFill(Color.CRIMSON);
+                r.setFill(Color.RED);
             }
             // Sets the number of Square neighbors that are mines
             else {
@@ -153,10 +154,10 @@ public class Square extends StackPane {
                         numberMinesAdjacent.setFill(Color.DARKRED);
                     }
                 }
+                Font font = Font.font("Arial", FontWeight.BOLD, FontPosture.REGULAR, 20);
+                numberMinesAdjacent.setFont(font);
+                this.getChildren().add(numberMinesAdjacent);
             }
-            Font font = Font.font("Arial", FontWeight.BOLD, FontPosture.REGULAR, 20);
-            numberMinesAdjacent.setFont(font);
-            this.getChildren().add(numberMinesAdjacent);
 
             // Win condition (number of squares unopened == number of squares that are bombs/mines)
             if(Game.getHeight() * Game.getWidth() - Game.getVisitedSquares().size() == Game.getBombs()) {
