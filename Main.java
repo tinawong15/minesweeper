@@ -1,3 +1,10 @@
+/*
+ * Tina Wong & Ray Onishi
+ * CSE160
+ * Section 1
+ * Final Project - Minesweeper
+ */
+
 import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
@@ -5,8 +12,8 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.control.*;
 import javafx.geometry.*;
 
-public class Main extends Application { // RUN THIS CLASS TO START GAME
-    // MINESWEEPER - Ray Onishi & Tina Wong
+// RUN THIS CLASS TO START THE GAME 
+public class Main extends Application {
 
     Game game;
     Square[][] grid;

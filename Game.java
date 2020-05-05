@@ -1,3 +1,10 @@
+/*
+ * Tina Wong & Ray Onishi
+ * CSE160
+ * Section 1
+ * Final Project - Minesweeper
+ */
+
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.GridPane;
 import javafx.geometry.Pos;
@@ -28,8 +35,9 @@ public class Game {
 
         grid = new Square[height][width];
 
+        // Adjust size of pane to fit all Squares
         rootPane = new GridPane();
-        rootPane.setMaxSize(height * 40,width * 40); // adjust size to fit all Squares
+        rootPane.setMaxSize(height * 40,width * 40); 
 
         for(int i = 0; i < height; i++) {
             for(int j = 0; j < width; j++) {
@@ -48,34 +56,42 @@ public class Game {
         }
     }
 
+    // Getter method for the rootPane
     public static Pane getRootPane() {
         return rootPane;
     }
 
+    // Getter method for visitedSquares
     public static Set<Square> getVisitedSquares() {
         return visitedSquares;
     }
 
+    // Getter method for width
     public static int getWidth() {
         return width;
     }
 
+    // Getter method for height
     public static int getHeight() {
         return height;
     }
 
+    // Getter method for # bombs
     public static int getBombs() {
         return bombs;
     }
 
+    // Getter method for the current turn
     public static int getTurn() {
         return turn;
     }
 
+    // Setter method for the turn
     public static void setTurn(int newTurn) {
         turn = newTurn;
     }
 
+    // Selects random mines on the grid
     public static void selectMines() {
         Random random = new Random();
         ArrayList<Integer> chosenHeight = new ArrayList<Integer>();
@@ -89,8 +105,9 @@ public class Game {
             randHeight = random.nextInt(height);
             randWidth = random.nextInt(width);
             for(int k = 0; k < chosenHeight.size(); k++){
+                // Check if randomly selected index is already in list of mines. if so, pick again
                 if(randHeight == chosenHeight.get(k) && randWidth == chosenWidth.get(k)){ 
-                    exists = true; // check if randomly selected index is already in list of mines. if so, pick again
+                    exists = true; 
                     break;
                 }
             }
@@ -106,14 +123,14 @@ public class Game {
         }
     }
 
+    // Selects random mines on the grid excluding the square at  i,j (avoiding first click loss)
     public static void selectMines(int i, int j) {
-        // reset all the mines
+        // Reset the grid to reselect mines excluding square at i,j
         for(int k = 0; k < height; k++) {
             for(int m = 0; m < width; m++) {
                 grid[k][m].setIsMine(false);
             }
         }
-        // System.out.println("i: "+i+" j: "+j);
         Random random = new Random();
         ArrayList<Integer> chosenHeight = new ArrayList<Integer>();
         ArrayList<Integer> chosenWidth = new ArrayList<Integer>();
@@ -125,13 +142,12 @@ public class Game {
             exists = false;
             randHeight = random.nextInt(height);
             randWidth = random.nextInt(width);
-            // System.out.println("Random Height: "+randHeight);
-            // System.out.println("Random Width: "+randWidth);
-            // System.out.println(i == randHeight);
-            // System.out.println(j == randWidth);
-            if(i != randHeight || j != randWidth ){ // check if randomly selected integers match the coordinates of the Square that the user first clicked
+
+            // Check if randomly selected integers match the coordinates of the Square that the user first clicked
+            if(i != randHeight || j != randWidth ){ 
                 for(int k = 0; k < chosenHeight.size(); k++){
-                    if(randHeight == chosenHeight.get(k) && randWidth == chosenWidth.get(k)){ // check if randomly selected index is already in list of mines
+                    // Check if randomly selected index is already in list of mines
+                    if(randHeight == chosenHeight.get(k) && randWidth == chosenWidth.get(k)){ 
                         exists = true;
                         break;
                     }
@@ -139,17 +155,19 @@ public class Game {
                 if(!exists){
                     chosenHeight.add(randHeight);
                     chosenWidth.add(randWidth);
-                    bombCount++; // increment whenever an index for a mine has been successfully chosen
+                    // Increment whenever an index for a mine has been successfully chosen
+                    bombCount++; 
                 }
             }
         }
 
         for(int l = 0; l < chosenHeight.size(); l++){
-            grid[chosenHeight.get(l)][chosenWidth.get(l)].setIsMine(true); // find Square and set to a mine
-            // System.out.println("i: "+chosenHeight.get(l)+" j: "+chosenWidth.get(l));
+            // Set the chosen square indices as mines
+            grid[chosenHeight.get(l)][chosenWidth.get(l)].setIsMine(true); 
         }
     }
 
+    // Adds neighbors to a square
     public void addNeighbors(int i, int j) { // add neighboring Squares to array so each Square can keep track of its neighbors
         if(i-1 >= 0) {
             grid[i][j].getNeighbors().add(grid[i-1][j]);
@@ -177,6 +195,7 @@ public class Game {
         }
     }
 
+    // Ran when the game is won by the user
     public static void win() {
         System.out.println("Congratulations! You win!");
         rootPane.getChildren().clear();
@@ -185,6 +204,7 @@ public class Game {
         resetGame(); // reset all used variables so user can replay game, as long as they do not close the menu settings while game is playing
     }
 
+    // Ran when the game is lost by the user
     public static void lose() {
         System.out.println("Game over! You lose!");
         rootPane.getChildren().clear();
@@ -193,6 +213,7 @@ public class Game {
         resetGame(); // reset all used variables so user can replay game, as long as they do not close the menu settings while game is playing
     }
 
+    // Resets all necessary parameters of the game once a game has been won or lost
     public static void resetGame(){
         turn = 0;
         bombs = 0;
