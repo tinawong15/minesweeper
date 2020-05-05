@@ -62,6 +62,12 @@ public class Square extends StackPane {
     }
 
     public void removeButton() {
+        Game.turn++;
+        if(Game.turn == 1) {
+            if(isMine) {
+                Game.selectMines(xcor, ycor);
+            }
+        }
         // once button is revealed, show text
         if(!visited){
             this.getChildren().remove(button);
