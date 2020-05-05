@@ -56,7 +56,7 @@ public class Square extends StackPane {
                     // Use helper function to remove button if user clicks on it
                     removeButton();
                 }
-                else { // User double clicked on button
+                else { // User right clicked on button
                     // Mark the square as containing a mine
                     button.setText("F");
                     button.setTextFill(Color.CRIMSON);
