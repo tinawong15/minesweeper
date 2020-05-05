@@ -10,6 +10,10 @@ import javafx.scene.control.Button;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.paint.Color;
 
+import javafx.event.EventHandler;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
+
 import javafx.scene.text.Text; 
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
@@ -45,8 +49,20 @@ public class Square extends StackPane {
         button.setMinWidth(35);
         this.getChildren().add(button);
 
-        // Use helper function to remove button if user clicks on it
-        button.setOnAction(e -> removeButton());
+        button.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent e) {
+                if (e.getButton().equals(MouseButton.PRIMARY)) {
+                    // Use helper function to remove button if user clicks on it
+                    removeButton();
+                }
+                else { // User double clicked on button
+                    // Mark the square as containing a mine
+                    button.setText("F");
+                    button.setTextFill(Color.CRIMSON);
+                }
+            }
+        });
 
     }
 
