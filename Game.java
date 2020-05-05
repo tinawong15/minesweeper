@@ -6,7 +6,6 @@
  */
 
 import javafx.scene.layout.Pane;
-import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import javafx.application.Platform;
 import javafx.geometry.Pos;
@@ -216,7 +215,8 @@ public class Game {
             }
         }
 
-        new java.util.Timer().schedule( new java.util.TimerTask() {
+        java.util.Timer timer = new java.util.Timer();
+        timer.schedule( new java.util.TimerTask() {
             public void run() {
                 Platform.runLater(new Runnable(){
                     public void run(){
@@ -224,12 +224,12 @@ public class Game {
                         rootPane.getChildren().clear();
                         rootPane.add(new Text("Congratulations! You win!"), height/2, width/2);
                         rootPane.setAlignment(Pos.CENTER);
-                        resetGame(); // reset all used variables so user can replay game, as long as they do not close the menu settings while game is playing                 
+                        resetGame(); // reset all used variables so user can replay game, as long as they do not close the menu settings while game is playing
+                        timer.cancel();                 
                     }});
             }
-        }, 3000 );
-
-        }
+        }, 2000 );
+    }
 
     // Ran when the game is lost by the user
     public static void lose() {
@@ -245,7 +245,9 @@ public class Game {
                 }
             }
         }
-        new java.util.Timer().schedule( new java.util.TimerTask() {
+
+        java.util.Timer timer = new java.util.Timer();
+        timer.schedule( new java.util.TimerTask() {
             public void run() {
                 Platform.runLater(new Runnable(){
                     public void run(){
@@ -254,9 +256,10 @@ public class Game {
                         rootPane.add(new Text("Game over! You lose!"), height/2, width/2);
                         rootPane.setAlignment(Pos.CENTER);
                         resetGame(); // reset all used variables so user can replay game, as long as they do not close the menu settings while game is playing
+                        timer.cancel();
                 }});
             }
-        }, 3000 );
+        }, 2000 );
     }
 
     // Resets all necessary parameters of the game once a game has been won or lost
