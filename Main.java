@@ -7,6 +7,7 @@ import javafx.geometry.*;
 
 public class Main extends Application { // RUN THIS CLASS TO START GAME
     // MINESWEEPER - Ray Onishi & Tina Wong
+
     Game game;
     Square[][] grid;
 
@@ -99,14 +100,19 @@ public class Main extends Application { // RUN THIS CLASS TO START GAME
                 int height = Integer.parseInt(tfHeight.getText());
                 int width = Integer.parseInt(tfWidth.getText());
                 int bombs = Integer.parseInt(tfBombs.getText());
-                Game.resetGame();
-                game = new Game(height, width, bombs);
-                Scene secondScene = new Scene(Game.getRootPane(), Game.getWidth() * 40 +10, Game.getHeight() * 40 +10);
-                secondStage.setScene(secondScene);
-                secondStage.setX(primaryStage.getX() + 250);
-                secondStage.setY(primaryStage.getY() + 100);
-                secondStage.setTitle("Minesweeper");
-                secondStage.show();
+                if(bombs < height * width) {
+                    Game.resetGame();
+                    game = new Game(height, width, bombs);
+                    Scene secondScene = new Scene(Game.getRootPane(), Game.getWidth() * 40 +10, Game.getHeight() * 40 +10);
+                    secondStage.setScene(secondScene);
+                    secondStage.setX(primaryStage.getX() + 250);
+                    secondStage.setY(primaryStage.getY() + 100);
+                    secondStage.setTitle("Minesweeper");
+                    secondStage.show();
+                }
+                else {
+                    System.out.println("Number of bombs must be less than height * width. Please try again.");
+                }
             } catch (NumberFormatException ex) {
                 System.out.println("Only integers are accepted. Please enter an integer for each of the fields.");
             }

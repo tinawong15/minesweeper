@@ -89,8 +89,8 @@ public class Game {
             randHeight = random.nextInt(height);
             randWidth = random.nextInt(width);
             for(int k = 0; k < chosenHeight.size(); k++){
-                if(randHeight == chosenHeight.get(k) && randWidth == chosenWidth.get(k)){
-                    exists = true;
+                if(randHeight == chosenHeight.get(k) && randWidth == chosenWidth.get(k)){ 
+                    exists = true; // check if randomly selected index is already in list of mines. if so, pick again
                     break;
                 }
             }
@@ -129,9 +129,9 @@ public class Game {
             // System.out.println("Random Width: "+randWidth);
             // System.out.println(i == randHeight);
             // System.out.println(j == randWidth);
-            if(i != randHeight || j != randWidth ){
+            if(i != randHeight || j != randWidth ){ // check if randomly selected integers match the coordinates of the Square that the user first clicked
                 for(int k = 0; k < chosenHeight.size(); k++){
-                    if(randHeight == chosenHeight.get(k) && randWidth == chosenWidth.get(k)){
+                    if(randHeight == chosenHeight.get(k) && randWidth == chosenWidth.get(k)){ // check if randomly selected index is already in list of mines
                         exists = true;
                         break;
                     }
@@ -139,18 +139,18 @@ public class Game {
                 if(!exists){
                     chosenHeight.add(randHeight);
                     chosenWidth.add(randWidth);
-                    bombCount++;
+                    bombCount++; // increment whenever an index for a mine has been successfully chosen
                 }
             }
         }
 
         for(int l = 0; l < chosenHeight.size(); l++){
-            grid[chosenHeight.get(l)][chosenWidth.get(l)].setIsMine(true);
-            System.out.println("i: "+chosenHeight.get(l)+" j: "+chosenWidth.get(l));
+            grid[chosenHeight.get(l)][chosenWidth.get(l)].setIsMine(true); // find Square and set to a mine
+            // System.out.println("i: "+chosenHeight.get(l)+" j: "+chosenWidth.get(l));
         }
     }
 
-    public void addNeighbors(int i, int j) {
+    public void addNeighbors(int i, int j) { // add neighboring Squares to array so each Square can keep track of its neighbors
         if(i-1 >= 0) {
             grid[i][j].getNeighbors().add(grid[i-1][j]);
         }

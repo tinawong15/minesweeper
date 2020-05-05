@@ -20,7 +20,7 @@ public class Square extends StackPane {
     private boolean visited = false;
 
     Text numberMinesAdjacent = new Text();
-    ArrayList<Square> neighbors = new ArrayList<Square>();
+    private ArrayList<Square> neighbors = new ArrayList<Square>();
 
     public Square(int xcor, int ycor) {
         this.xcor = xcor;
@@ -65,8 +65,8 @@ public class Square extends StackPane {
 
     public void removeButton() {
         Game.setTurn(Game.getTurn() + 1);
-        if(Game.getTurn() == 1) {
-            if(isMine) {
+        if(Game.getTurn() == 1) { // user is clicking a Square for the first time
+            if(isMine) { // check so that first button a user clicks cannot be a mine
                 Game.selectMines(xcor, ycor);
             }
         }
