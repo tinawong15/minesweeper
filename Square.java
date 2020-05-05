@@ -13,10 +13,12 @@ import java.util.ArrayList;
 public class Square extends StackPane {
     Button button = new Button();
     Rectangle r = new Rectangle();
-    int xcor;
-    int ycor;
-    boolean isMine;
-    boolean visited = false;
+    
+    private int xcor;
+    private int ycor;
+    private boolean isMine;
+    private boolean visited = false;
+
     Text numberMinesAdjacent = new Text();
     ArrayList<Square> neighbors = new ArrayList<Square>();
 
@@ -62,8 +64,8 @@ public class Square extends StackPane {
     }
 
     public void removeButton() {
-        Game.turn++;
-        if(Game.turn == 1) {
+        Game.setTurn(Game.getTurn() + 1);
+        if(Game.getTurn() == 1) {
             if(isMine) {
                 Game.selectMines(xcor, ycor);
             }

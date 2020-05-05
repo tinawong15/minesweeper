@@ -15,7 +15,7 @@ public class Game {
     private static int bombs;
     private static Set<Square> visitedSquares = new HashSet<Square>(); // includes all Squares that have been visited, except mines
 
-    static int turn;
+    private static int turn;
     private static Square[][] grid;
 
     private static GridPane rootPane;
@@ -66,6 +66,14 @@ public class Game {
 
     public static int getBombs() {
         return bombs;
+    }
+
+    public static int getTurn() {
+        return turn;
+    }
+
+    public static void setTurn(int newTurn) {
+        turn = newTurn;
     }
 
     public static void selectMines() {
