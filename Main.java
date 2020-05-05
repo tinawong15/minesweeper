@@ -6,6 +6,7 @@ import javafx.scene.control.*;
 import javafx.geometry.*;
 
 public class Main extends Application { // RUN THIS CLASS TO START GAME
+    // MINESWEEPER - Ray Onishi & Tina Wong
     Game game;
     Square[][] grid;
 
