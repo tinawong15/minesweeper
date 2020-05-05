@@ -63,7 +63,7 @@ public class Main extends Application { // RUN THIS CLASS TO START GAME
         beginner.setOnAction(e -> {
             Game.resetGame();
             game = new Game(9, 9, 10);
-            Scene secondScene = new Scene(Game.getRootPane(), Game.getHeight() * 40 +10, Game.getWidth() * 40 +10); // added a few pixels to adjust for margins
+            Scene secondScene = new Scene(Game.getRootPane(), Game.getWidth() * 40 +10, Game.getHeight() * 40 +10); // added a few pixels to adjust for margins
             secondStage.setScene(secondScene);
             secondStage.setX(primaryStage.getX() + 250);
             secondStage.setY(primaryStage.getY() + 100);
@@ -74,7 +74,7 @@ public class Main extends Application { // RUN THIS CLASS TO START GAME
         intermediate.setOnAction(e -> {
             Game.resetGame();
             game = new Game(16, 16, 40);
-            Scene secondScene = new Scene(Game.getRootPane(), Game.getHeight() * 40 +20, Game.getWidth() * 40 +20);
+            Scene secondScene = new Scene(Game.getRootPane(), Game.getWidth() * 40 +20, Game.getHeight() * 40 +20);
             secondStage.setScene(secondScene);
             secondStage.setX(primaryStage.getX() + 200);
             secondStage.setY(primaryStage.getY() + 100);
@@ -85,7 +85,7 @@ public class Main extends Application { // RUN THIS CLASS TO START GAME
         expert.setOnAction(e -> {
             Game.resetGame();
             game = new Game(16, 30, 99);
-            Scene secondScene = new Scene(Game.getRootPane(), Game.getHeight() * 40 +20, Game.getWidth() * 40 +20);
+            Scene secondScene = new Scene(Game.getRootPane(), Game.getWidth() * 40 +20, Game.getHeight() * 40 +20);
             secondStage.setScene(secondScene);
             secondStage.setX(primaryStage.getX() + 250);
             secondStage.setY(primaryStage.getY() + 100);

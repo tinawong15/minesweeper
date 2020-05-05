@@ -35,7 +35,7 @@ public class Game {
             for(int j = 0; j < width; j++) {
                 Square s = new Square(i, j);
                 grid[i][j] = s;
-                rootPane.add(s, i, j);
+                rootPane.add(s, j, i);
             }
         }
 
@@ -120,12 +120,12 @@ public class Game {
 
     public static void selectMines(int i, int j) {
         // reset all the mines
-        for(int k = 0; i < height; i++) {
-            for(int m = 0; j < width; j++) {
+        for(int k = 0; k < height; k++) {
+            for(int m = 0; m < width; m++) {
                 grid[k][m].setIsMine(false);
             }
         }
-        // try random generation again
+        // System.out.println("i: "+i+" j: "+j);
         Random random = new Random();
         ArrayList<Integer> chosenHeight = new ArrayList<Integer>();
         ArrayList<Integer> chosenWidth = new ArrayList<Integer>();
@@ -137,6 +137,10 @@ public class Game {
             exists = false;
             randHeight = random.nextInt(height);
             randWidth = random.nextInt(width);
+            // System.out.println("Random Height: "+randHeight);
+            // System.out.println("Random Width: "+randWidth);
+            // System.out.println(i == randHeight);
+            // System.out.println(j == randWidth);
             if(i != randHeight || j != randWidth ){
                 for(int k = 0; k < chosenHeight.size(); k++){
                     if(randHeight == chosenHeight.get(k) && randWidth == chosenWidth.get(k)){
@@ -154,6 +158,7 @@ public class Game {
 
         for(int l = 0; l < chosenHeight.size(); l++){
             grid[chosenHeight.get(l)][chosenWidth.get(l)].setIsMine(true);
+            System.out.println("i: "+chosenHeight.get(l)+" j: "+chosenWidth.get(l));
         }
         // ArrayList<Integer> chosenIndices = new ArrayList<Integer>();
         // int bombCount = 0;
