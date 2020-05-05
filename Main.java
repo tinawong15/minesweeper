@@ -67,6 +67,13 @@ public class Main extends Application {
         pane.add(directions, 0,5,4,1);
         GridPane.setHalignment(directions, HPos.LEFT);
 
+        Label instructions = new Label("How to Play:");
+        pane.add(instructions, 0,6,4,1);
+        GridPane.setHalignment(instructions, HPos.CENTER);
+        Label instructions2 = new Label("Click to reveal a Square. Right click to flag a Square.");
+        pane.add(instructions2, 0,7,4,1);
+        GridPane.setHalignment(instructions2, HPos.LEFT);
+
         // Add new stage so new window with the game can pop up after user selects which level
         Stage secondStage = new Stage();
         beginner.setOnAction(e -> {
@@ -128,7 +135,7 @@ public class Main extends Application {
         });
 
         // Create a scene and place it in the stage
-        Scene scene = new Scene(pane, 350, 200);
+        Scene scene = new Scene(pane, 350, 240);
         primaryStage.setTitle("Game Settings");
         primaryStage.setScene(scene); primaryStage.show(); 
     }
